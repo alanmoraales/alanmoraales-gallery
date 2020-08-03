@@ -1,0 +1,33 @@
+{
+  "name": "alanmoraales",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@iconify/icons-bx": "^1.0.3",
+    "@iconify/icons-clarity": "^1.0.0",
+    "@iconify/icons-dashicons": "^1.0.11",
+    "@svgr/parcel-plugin-svgr": "^5.4.0",
+    "firebase": "^7.17.1",
+    "parcel-bundler": "^1.12.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-images": "^1.1.7",
+    "react-infinite-scroll-component": "^5.0.5",
+    "react-photo-gallery": "^8.0.0"
+  },
+  "devDependencies": {
+    "@iconify/icons-ic": "^1.0.14",
+    "@iconify/react": "^1.1.3"
+  }
+}
