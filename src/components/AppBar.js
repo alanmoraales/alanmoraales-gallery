@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import { neutral } from "../utils";
 
-import Logo from "./logo-azul-1.svg";
+import { Logos } from "../assets";
 import { Icon, InlineIcon } from "@iconify/react";
 import menuAlt from "@iconify/icons-dashicons/menu-alt";
 
@@ -28,7 +28,7 @@ const AppBar = () => {
   return (
     <Wrapper>
       <Bar>
-        <Logo />
+        <Logos.LogoAzul />
         <Icon icon={menuAlt} height={23} />
       </Bar>
     </Wrapper>
