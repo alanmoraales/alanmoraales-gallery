@@ -3,6 +3,7 @@ import Gallery from "react-photo-gallery";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import GallerySpinner from "./GallerySpinner";
+import EndGalleryMessage from "./EndGalleryMessage";
 
 import styled from "@emotion/styled";
 
@@ -19,7 +20,7 @@ const InfiniteGallery = ({ thumbnails, next, hasMore }) => {
         next={next}
         hasMore={hasMore}
         loader={<GallerySpinner />}
-        endMessage={<p>No more elements.</p>}
+        endMessage={<EndGalleryMessage />}
       >
         <Gallery photos={thumbnails} margin={5} />
       </InfiniteScroll>
