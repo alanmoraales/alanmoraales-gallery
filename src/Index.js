@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import InfiniteGallery from "./components/InfiniteGallery";
 import Navigation from "./components/Navigation";
 import AppBar from "./components/AppBar";
+import GallerySpinner from "./components/GallerySpinner";
 
 const Index = () => {
   //const [photos, setPhotos] = useState([]);
@@ -73,12 +74,18 @@ const Index = () => {
       });
   }, []);
 
-  return loading ? (
-    <p>loading...</p>
-  ) : (
+  return (
     <div>
       <AppBar />
-      <InfiniteGallery thumbnails={thumbnails} next={next} hasMore={hasMore} />
+      {loading ? (
+        <GallerySpinner />
+      ) : (
+        <InfiniteGallery
+          thumbnails={thumbnails}
+          next={next}
+          hasMore={hasMore}
+        />
+      )}
       <Navigation />
     </div>
   );
