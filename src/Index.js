@@ -73,12 +73,18 @@ const Index = () => {
       });
   }, []);
 
-  return loading ? (
-    <p>loading...</p>
-  ) : (
+  return (
     <div>
       <AppBar />
-      <InfiniteGallery thumbnails={thumbnails} next={next} hasMore={hasMore} />
+      {loading ? (
+        <p>loading...</p>
+      ) : (
+        <InfiniteGallery
+          thumbnails={thumbnails}
+          next={next}
+          hasMore={hasMore}
+        />
+      )}
       <Navigation />
     </div>
   );
