@@ -74,18 +74,21 @@ const Index = () => {
       });
   }, []);
 
-  return (
+  const Spinner = styled.div`
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+  `;
+
+  return loading ? (
+    <Spinner>
+      <GallerySpinner />
+    </Spinner>
+  ) : (
     <div>
       <AppBar />
-      {loading ? (
-        <GallerySpinner />
-      ) : (
-        <InfiniteGallery
-          thumbnails={thumbnails}
-          next={next}
-          hasMore={hasMore}
-        />
-      )}
+      <InfiniteGallery thumbnails={thumbnails} next={next} hasMore={hasMore} />
       <Navigation />
     </div>
   );
