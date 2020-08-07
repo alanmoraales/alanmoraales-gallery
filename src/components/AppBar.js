@@ -16,6 +16,12 @@ const Bar = styled.div`
   width: 90%;
   height: 63px;
   margin: 0 auto;
+
+  @media (min-width: 1280px) {
+    .icon {
+      display: none;
+    }
+  }
 `;
 
 const Wrapper = styled.div`
@@ -24,12 +30,31 @@ const Wrapper = styled.div`
   background-color: ${neutral[100]};
 `;
 
+const Links = styled.div`
+  display: none;
+
+  @media (min-width: 1280px) {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+  }
+`;
+
 const AppBar = () => {
   return (
     <Wrapper>
       <Bar>
         <Logos.LogoAzul />
-        <Icon icon={menuAlt} height={23} />
+        <Icon className="icon" icon={menuAlt} height={23} />
+
+        <Links>
+          <a className="link">gallery</a>
+          <a className="link">collections</a>
+          <a className="link">about</a>
+          <a className="link">instagram</a>
+          <a className="link">twitter</a>
+          <a className="link">github</a>
+        </Links>
       </Bar>
     </Wrapper>
   );

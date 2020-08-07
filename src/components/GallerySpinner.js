@@ -6,10 +6,10 @@ import { blue } from "../utils";
 
 const SpinnerWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  height: calc(100vh - 55px - 63px);
   align-items: center;
   justify-content: center;
+  padding: 15px;
+  width: 95%;
 `;
 
 const override = css`
@@ -20,7 +20,7 @@ const override = css`
 const GallerySpinner = () => {
   return (
     <SpinnerWrapper>
-      <PulseLoader size={10} color={blue[400]} />
+      <PulseLoader size={10} color={blue[400]} css={override} />
     </SpinnerWrapper>
   );
 };

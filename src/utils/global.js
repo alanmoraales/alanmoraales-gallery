@@ -6,6 +6,8 @@ export const global = css`
   html {
     font-size: 16px;
     box-sizing: border-box;
+    max-width: 2000px;
+    margin: 0 auto;
   }
 
   *,
@@ -17,5 +19,7 @@ export const global = css`
   body {
     margin: 0;
     font-family: ${primaryFont};
+    max-width: 2000px;
+    margin: 0 auto;
   }
 `;
