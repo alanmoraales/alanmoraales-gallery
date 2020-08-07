@@ -7,14 +7,20 @@ import { Global } from "@emotion/core";
 import { global } from "./utils";
 
 import Index from "./Index";
+import About from "./About";
+import Collections from "./Collections";
 
 const App = () => {
   return (
     <Router>
       <Global styles={global} />
       <Switch>
-        <Route path="/collections">collections</Route>
-        <Route path="/about">about</Route>
+        <Route path="/collections">
+          <Collections />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
         <Route path="/">
           <Index />
         </Route>
