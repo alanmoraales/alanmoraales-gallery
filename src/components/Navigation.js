@@ -20,6 +20,10 @@ const Navbar = styled.div`
 
   position: sticky;
   bottom: 0px;
+
+  @media (min-width: 1280px) {
+    display: none;
+  }
 `;
 
 const Navigation = () => {
