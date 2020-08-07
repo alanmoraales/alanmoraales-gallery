@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
 // npm install --save-dev @iconify/react @iconify/icons-ic
 
 import { typeScale, fontWeight, primaryFont, neutral } from "../utils";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 
 const Div = styled.div`
   color: ${neutral[100]};
@@ -21,12 +22,14 @@ const Text = styled.p`
   margin-top: 5px;
 `;
 
-const NavItem = ({ icon, text, height }) => {
+const NavItem = ({ icon, text, height, to }) => {
   return (
-    <Div>
-      <Icon icon={icon} height={height} />
-      <Text>{text}</Text>
-    </Div>
+    <Link to={to}>
+      <Div>
+        <Icon icon={icon} height={height} />
+        <Text>{text}</Text>
+      </Div>
+    </Link>
   );
 };
 

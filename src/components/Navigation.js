@@ -29,9 +29,14 @@ const Navbar = styled.div`
 const Navigation = () => {
   return (
     <Navbar>
-      <NavItem icon={baselinePhoto} text="gallery" height={20} />
-      <NavItem icon={imageGallerySolid} text="collections" height={20} />
-      <NavItem icon={bxsUser} text="about" height={20} />
+      <NavItem icon={baselinePhoto} text="gallery" height={20} to="/" />
+      <NavItem
+        icon={imageGallerySolid}
+        text="collections"
+        height={20}
+        to="/collections"
+      />
+      <NavItem icon={bxsUser} text="about" height={20} to="/about" />
     </Navbar>
   );
 };
