@@ -14,6 +14,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@iconify/icons-ant-design": "^1.0.8",
     "@iconify/icons-bx": "^1.0.3",
     "@iconify/icons-clarity": "^1.0.0",
     "@iconify/icons-dashicons": "^1.0.11",

@@ -15,13 +15,13 @@ const App = () => {
     <Router>
       <Global styles={global} />
       <Switch>
-        <Route path="/collections">
+        <Route exact path="/collections">
           <Collections />
         </Route>
-        <Route path="/about">
+        <Route exact path="/about">
           <About />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Index />
         </Route>
       </Switch>
