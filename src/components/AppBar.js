@@ -7,6 +7,8 @@ import { Logos } from "../assets";
 import { Icon, InlineIcon } from "@iconify/react";
 import menuAlt from "@iconify/icons-dashicons/menu-alt";
 
+import { Link } from "react-router-dom";
+
 const Bar = styled.div`
   display: flex;
   flex-direction: row;
@@ -28,6 +30,7 @@ const Wrapper = styled.div`
   position: sticky;
   top: 0px;
   background-color: ${neutral[100]};
+  z-index: 1;
 `;
 
 const Links = styled.div`
@@ -37,6 +40,11 @@ const Links = styled.div`
     display: flex;
     justify-content: space-between;
     width: 500px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: black;
   }
 `;
 
@@ -48,12 +56,36 @@ const AppBar = () => {
         <Icon className="icon" icon={menuAlt} height={23} />
 
         <Links>
-          <a className="link">gallery</a>
-          <a className="link">collections</a>
-          <a className="link">about</a>
-          <a className="link">instagram</a>
-          <a className="link">twitter</a>
-          <a className="link">github</a>
+          <Link to="/" className="link">
+            gallery
+          </Link>
+          <Link to="/collections" className="link">
+            collections
+          </Link>
+          <Link to="/about" className="link">
+            about
+          </Link>
+          <a
+            href="https://www.instagram.com/alanmoraales/"
+            target="blank"
+            className="link"
+          >
+            instagram
+          </a>
+          <a
+            href="https://twitter.com/alanmoraaless"
+            target="blank"
+            className="link"
+          >
+            twitter
+          </a>
+          <a
+            href="https://github.com/alanmoraales"
+            target="blank"
+            className="link"
+          >
+            github
+          </a>
         </Links>
       </Bar>
     </Wrapper>
