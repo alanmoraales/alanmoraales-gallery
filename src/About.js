@@ -2,6 +2,7 @@ import React from "react";
 
 import AppBar from "./components/AppBar";
 import Navigation from "./components/Navigation";
+import ContactForm from "./components/ContactForm";
 
 import hero from "./assets/images/IMG_20200704_195213 (1).jpg";
 
@@ -31,10 +32,13 @@ const Description = styled.div`
   padding: 20px;
   font-family: ${secondaryFont};
   font-size: ${typeScale.header5};
+  margin: 0px;
 `;
 
 const Hero = styled.img`
   width: 100%;
+  height: 100%;
+  margin: 0px;
 `;
 
 const Social = styled.div`
@@ -43,6 +47,8 @@ const Social = styled.div`
   padding: 40px;
   padding-right: 60px;
   padding-left: 60px;
+  max-width: 550px;
+  margin: 0 auto;
 `;
 
 const About = () => {
@@ -79,6 +85,7 @@ const About = () => {
             to="https://github.com/alanmoraales"
           />
         </Social>
+        <ContactForm />
       </Wrapper>
       <Navigation />
     </div>
