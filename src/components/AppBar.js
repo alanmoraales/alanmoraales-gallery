@@ -30,6 +30,7 @@ const Wrapper = styled.div`
   position: sticky;
   top: 0px;
   background-color: ${neutral[100]};
+  z-index: 1;
 `;
 
 const Links = styled.div`
