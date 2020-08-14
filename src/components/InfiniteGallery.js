@@ -41,7 +41,7 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
       {viewerOpen ? (
         <Lightbox
           image={photos[currentImage].src}
-          title="photo by alanmoraales"
+          title="alanmoraales"
           onClose={closeViewer}
           allowRotate={false}
           allowReset={false}
