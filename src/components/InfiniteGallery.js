@@ -24,6 +24,7 @@ Modal.setAppElement("#modal");
 const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
+  const [windowOffset, setWindowOffset] = useState(0);
 
   const openViewer = useCallback((event, { photo, index }) => {
     setCurrentImage(index);
@@ -33,6 +34,16 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
   const closeViewer = () => {
     setViewerOpen(false);
     document.body.removeAttribute("style");
+    window.scrollTo(0, windowOffset);
+  };
+
+  const onOpen = () => {
+    //document.body.style.overflow = "hidden";
+    setWindowOffset(window.scrollY);
+    document.body.setAttribute(
+      "style",
+      `position: fixed; top: -${windowOffset}px; left:0; right: 0;`
+    );
   };
 
   return (
@@ -48,7 +59,7 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
       </InfiniteScroll>
       <Modal
         isOpen={viewerOpen}
-        onAfterOpen={() => (document.body.style.overflow = "hidden")}
+        onAfterOpen={onOpen}
         OnRequestClose={closeViewer}
         style={customStyles}
       >
