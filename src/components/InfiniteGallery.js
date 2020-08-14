@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Gallery from "react-photo-gallery";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Modal from "react-modal";
 import Lightbox from "react-awesome-lightbox";
 import "react-awesome-lightbox/build/style.css";
 
@@ -14,6 +15,12 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+const customStyles = {
+  overlay: { zIndex: 2 },
+};
+
+Modal.setAppElement("#modal");
+
 const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
@@ -25,6 +32,7 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
 
   const closeViewer = () => {
     setViewerOpen(false);
+    document.body.removeAttribute("style");
   };
 
   return (
@@ -38,7 +46,12 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
       >
         <Gallery photos={thumbnails} margin={5} onClick={openViewer} />
       </InfiniteScroll>
-      {viewerOpen ? (
+      <Modal
+        isOpen={viewerOpen}
+        onAfterOpen={() => (document.body.style.overflow = "hidden")}
+        OnRequestClose={closeViewer}
+        style={customStyles}
+      >
         <Lightbox
           image={photos[currentImage].src}
           title="alanmoraales"
@@ -46,7 +59,7 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
           allowRotate={false}
           allowReset={false}
         />
-      ) : null}
+      </Modal>
     </Wrapper>
   );
 };
