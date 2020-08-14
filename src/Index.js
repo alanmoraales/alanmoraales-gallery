@@ -10,7 +10,7 @@ import AppBar from "./components/AppBar";
 import GallerySpinner from "./components/GallerySpinner";
 
 const Index = () => {
-  //const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [lastDocument, setLastDocument] = useState();
@@ -34,7 +34,6 @@ const Index = () => {
     setThumbnails(thumbnails.concat(newThumbnails));
   };
 
-  /*
   const extractPhotos = (snapshots) => {
     const newPhotos = snapshots.docs.map((doc) => {
       let data = doc.data();
@@ -44,7 +43,6 @@ const Index = () => {
     });
     setPhotos(photos.concat(newPhotos));
   };
-  */
 
   const next = () => {
     query
@@ -54,7 +52,7 @@ const Index = () => {
       .then((snapshots) => {
         if (snapshots.docs.length > 0) {
           extractThumbnails(snapshots);
-          //extractPhotos(snapshots);
+          extractPhotos(snapshots);
           setLastDocument(snapshots.docs[snapshots.docs.length - 1]);
         } else {
           setHasMore(false);
@@ -68,7 +66,7 @@ const Index = () => {
       .get()
       .then((snapshots) => {
         extractThumbnails(snapshots);
-        //extractPhotos(snapshots);
+        extractPhotos(snapshots);
         setLastDocument(snapshots.docs[snapshots.docs.length - 1]);
         setLoading(false);
       });
@@ -88,7 +86,12 @@ const Index = () => {
   ) : (
     <div>
       <AppBar />
-      <InfiniteGallery thumbnails={thumbnails} next={next} hasMore={hasMore} />
+      <InfiniteGallery
+        thumbnails={thumbnails}
+        photos={photos}
+        next={next}
+        hasMore={hasMore}
+      />
       <Navigation />
     </div>
   );
