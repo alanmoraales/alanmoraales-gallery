@@ -20,13 +20,14 @@ const Form = styled.form`
   padding-top: 35px;
   padding-bottom: 35px;
 
+  width: 100%;
   max-width: 500px;
   margin: 0 auto;
 `;
 
 const Title = styled.p`
   margin: 0px;
-  font-size: ${typeScale.header5};
+  font-size: ${typeScale.header4};
   font-family: ${secondaryFont};
   margin-bottom: 20px;
 `;
@@ -40,10 +41,20 @@ const Submit = styled.input`
   font-family: ${primaryFont};
   font-weight: ${fontWeight.medium};
   font-size: ${typeScale.paragraph};
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: ${blue[400]};
+  min-height: calc(100vh - 63px - 55px);
+
+  @media (min-width: 1280px) {
+    min-height: calc(100vh - 63px);
+  }
 `;
 
 const ContactForm = () => {
