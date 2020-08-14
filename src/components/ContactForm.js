@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import Axios from "axios";
 
 import {
   blue,
@@ -75,6 +76,7 @@ const ContactForm = () => {
     <Wrapper>
       <Form onSubmit={handleSubmit}>
         <Title>Contact</Title>
+        <p>formulario de prueba</p>
         <Input label="name" value={nameValue} onChange={handleNameChange} />
         <Input label="email" value={emailValue} onChange={handleEmailChange} />
         <TextArea
