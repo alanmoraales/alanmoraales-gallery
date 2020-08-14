@@ -22,6 +22,7 @@
     "firebase": "^7.17.1",
     "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
+    "react-awesome-lightbox": "^1.7.3",
     "react-dom": "^16.13.1",
     "react-images": "^1.1.7",
     "react-infinite-scroll-component": "^5.0.5",
