@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
 
@@ -32,6 +33,10 @@ const useStyles = makeStyles({
     minWidth: "0px",
     paddingRight: "15px",
   },
+  link: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 });
 
 const Wrapper = styled.div`
@@ -43,6 +48,31 @@ const Wrapper = styled.div`
   padding-bottom: 40px;
 `;
 
+const AItem = ({ href, text }) => {
+  const classes = useStyles();
+  return (
+    <a href={href} target="blank" className={classes.link}>
+      <ListItem button key={text} className={classes.listItem}>
+        <ListItemText>{text}</ListItemText>
+      </ListItem>
+    </a>
+  );
+};
+
+const LinkItem = ({ text, to, icon }) => {
+  const classes = useStyles();
+  return (
+    <Link to={to} className={classes.link}>
+      <ListItem button key={text} className={classes.listItem}>
+        <ListItemIcon className={classes.listIcon}>
+          <Icon icon={icon} className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{text}</ListItemText>
+      </ListItem>
+    </Link>
+  );
+};
+
 const Sidebar = ({ open, onClose }) => {
   const classes = useStyles();
 
@@ -50,33 +80,22 @@ const Sidebar = ({ open, onClose }) => {
     <Drawer open={open} onClose={onClose} variant="temporary" anchor="right">
       <Wrapper>
         <List>
-          <ListItem button key="gallery" className={classes.listItem}>
-            <ListItemIcon className={classes.listIcon}>
-              <Icon icon={baselinePhoto} className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>gallery</ListItemText>
-          </ListItem>
-          <ListItem button key="collections" className={classes.listItem}>
-            <ListItemIcon className={classes.listIcon}>
-              <Icon icon={imageGallerySolid} className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>collections</ListItemText>
-          </ListItem>
-          <ListItem button key="about" className={classes.listItem}>
-            <ListItemIcon className={classes.listIcon}>
-              <Icon icon={bxsUser} className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>about</ListItemText>
-          </ListItem>
+          <LinkItem text="gallery" to="/" icon={baselinePhoto} />
+          <LinkItem
+            text="collections"
+            to="/collections"
+            icon={imageGallerySolid}
+          />
+          <LinkItem text="about" to="/about" icon={bxsUser} />
         </List>
         <List>
           <Divider />
-          <ListItem button key="instagram" className={classes.listItem}>
-            <ListItemText>instagram</ListItemText>
-          </ListItem>
-          <ListItem button key="github" className={classes.listItem}>
-            <ListItemText>github</ListItemText>
-          </ListItem>
+          <AItem
+            href="https://www.instagram.com/alanmoraales/"
+            text="instagram"
+          />
+          <AItem href="https://twitter.com/alanmoraaless" text="twitter" />
+          <AItem href="https://github.com/alanmoraales" text="github" />
         </List>
       </Wrapper>
     </Drawer>
