@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 // npm install --save-dev @iconify/react @iconify/icons-ic
 
 import { typeScale, fontWeight, primaryFont, neutral } from "../utils";
@@ -24,7 +26,12 @@ const Text = styled.p`
 
 const NavItem = ({ icon, text, height, to }) => {
   return (
-    <Link to={to}>
+    <Link
+      to={to}
+      css={css`
+        text-decoration: none;
+      `}
+    >
       <Div>
         <Icon icon={icon} height={height} />
         <Text>{text}</Text>

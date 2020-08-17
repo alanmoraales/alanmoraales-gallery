@@ -75,7 +75,7 @@ const ContactForm = () => {
     <Wrapper>
       <Form onSubmit={handleSubmit}>
         <Title>Contact</Title>
-        <p>formulario de prueba</p>
+        <p>test form</p>
         <Input label="name" value={nameValue} onChange={handleNameChange} />
         <Input label="email" value={emailValue} onChange={handleEmailChange} />
         <TextArea

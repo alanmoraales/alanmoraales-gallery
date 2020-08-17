@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 import { neutral } from "../utils";
 
 import { Logos } from "../assets";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import menuAlt from "@iconify/icons-dashicons/menu-alt";
 
 import { Link } from "react-router-dom";
+
+import Sidebar from "./Sidebar";
 
 const Bar = styled.div`
   display: flex;
@@ -49,11 +51,20 @@ const Links = styled.div`
 `;
 
 const AppBar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
   return (
     <Wrapper>
       <Bar>
         <Logos.LogoAzul />
-        <Icon className="icon" icon={menuAlt} height={23} />
+        <Icon
+          className="icon"
+          icon={menuAlt}
+          height={23}
+          onClick={toggleSidebar}
+        />
 
         <Links>
           <Link to="/" className="link">
@@ -88,6 +99,7 @@ const AppBar = () => {
           </a>
         </Links>
       </Bar>
+      <Sidebar open={sidebarOpen} onClose={toggleSidebar} />
     </Wrapper>
   );
 };
