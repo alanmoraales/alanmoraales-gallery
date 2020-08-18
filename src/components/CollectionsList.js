@@ -94,14 +94,17 @@ const CardList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `;
-const CollectionsList = ({ collections, onCardClick }) => {
-  const classes = useStyles();
+const CollectionsList = ({ collections, onCardClick, yOffset }) => {
+  useEffect(() => {
+    window.scrollTo(0, yOffset);
+  }, []);
 
   return (
     <Wrapper>
       <CardList>
         {collections.map((collection, index) => (
           <MediaCard
+            id={index}
             key={index}
             index={index}
             title={collection.name}

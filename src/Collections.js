@@ -29,6 +29,7 @@ const Collections = () => {
   const [collections, setCollections] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [singleView, setSingleView] = useState(false);
+  const [listOffset, setListOffset] = useState(0);
 
   const fetchCollections = () => {
     query
@@ -51,10 +52,15 @@ const Collections = () => {
 
   const onCardClick = (index) => {
     setCurrentIndex(index);
-    setSingleView(true);
+    toggleView();
   };
 
-  const toggleView = () => setSingleView(!singleView);
+  const toggleView = () => {
+    if (!singleView) {
+      setListOffset(window.scrollY);
+    }
+    setSingleView(!singleView);
+  };
 
   return (
     <div>
@@ -70,6 +76,7 @@ const Collections = () => {
           <CollectionsList
             collections={collections}
             onCardClick={onCardClick}
+            yOffset={listOffset}
           />
         )}
       </Wrapper>

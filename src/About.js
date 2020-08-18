@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import AppBar from "./components/AppBar";
 import Navigation from "./components/Navigation";
@@ -101,6 +101,10 @@ const DownIcon = styled.div`
 `;
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <AppBar />
