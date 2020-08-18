@@ -46,6 +46,8 @@ const Wrapper = styled.div`
   height: 100%;
   padding-top: 40px;
   padding-bottom: 40px;
+  width: 70vw;
+  max-width: 300px;
 `;
 
 const AItem = ({ href, text }) => {
@@ -74,8 +76,6 @@ const LinkItem = ({ text, to, icon }) => {
 };
 
 const Sidebar = ({ open, onClose }) => {
-  const classes = useStyles();
-
   return (
     <Drawer open={open} onClose={onClose} variant="temporary" anchor="right">
       <Wrapper>
