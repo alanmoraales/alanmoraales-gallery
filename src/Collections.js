@@ -5,6 +5,8 @@ import styled from "@emotion/styled";
 import AppBar from "./components/AppBar";
 import Navigation from "./components/Navigation";
 import CollectionsList from "./components/CollectionsList";
+import SingleCollectionView from "./components/SingleCollectionView";
+import CollectionsBar from "./components/CollectionsBar";
 
 import Firebase from "../config/Firebase";
 
@@ -25,13 +27,21 @@ const Collections = () => {
   const limit = 10;
 
   const [collections, setCollections] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [singleView, setSingleView] = useState(false);
 
   const fetchCollections = () => {
     query
       .limit(limit)
       .get()
       .then((snapshots) => {
-        setCollections(snapshots.docs);
+        const collec = snapshots.docs.map((doc) => ({
+          name: doc.data().name,
+          id: doc.data().id,
+          description: doc.data().description,
+          images: doc.data().images,
+        }));
+        setCollections(collec);
       });
   };
 
@@ -39,11 +49,29 @@ const Collections = () => {
     fetchCollections();
   }, []);
 
+  const onCardClick = (index) => {
+    setCurrentIndex(index);
+    setSingleView(true);
+  };
+
+  const toggleView = () => setSingleView(!singleView);
+
   return (
     <div>
       <AppBar />
+      <CollectionsBar onChange={toggleView} singleViewState={singleView} />
       <Wrapper>
-        <CollectionsList collections={collections} />
+        {singleView ? (
+          <SingleCollectionView
+            collections={collections}
+            currentIndex={currentIndex}
+          />
+        ) : (
+          <CollectionsList
+            collections={collections}
+            onCardClick={onCardClick}
+          />
+        )}
       </Wrapper>
       <Navigation />
     </div>

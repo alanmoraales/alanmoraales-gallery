@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MediaCard = ({ title, image, description }) => {
+const MediaCard = ({ index, title, image, description, onCardClick }) => {
   const firestore = Firebase.firestore();
   const query = firestore.collection("images").doc(image);
   const classes = useStyles();
@@ -42,9 +42,14 @@ const MediaCard = ({ title, image, description }) => {
     });
   });
 
+  const handleClick = () => {
+    onCardClick(index);
+  };
+
+  // add default image value to get rid of warning
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea index={index} onClick={handleClick}>
         <CardMedia
           className={classes.media}
           image={coverURL}
@@ -65,7 +70,12 @@ const MediaCard = ({ title, image, description }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          index={index}
+          onClick={handleClick}
+        >
           see more
         </Button>
       </CardActions>
@@ -79,23 +89,25 @@ const Wrapper = styled.div`
 
 const CardList = styled.div`
   margin: 0 auto;
-  max-width: 95%;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
-const CollectionsList = ({ collections }) => {
+const CollectionsList = ({ collections, onCardClick }) => {
   const classes = useStyles();
 
   return (
     <Wrapper>
       <CardList>
-        {collections.map((collection) => (
+        {collections.map((collection, index) => (
           <MediaCard
-            key={collection.data().id}
-            title={collection.data().name}
-            image={collection.data().images[0]}
-            description={collection.data().description}
+            key={index}
+            index={index}
+            title={collection.name}
+            image={collection.images[0]}
+            description={collection.description}
+            onCardClick={onCardClick}
           />
         ))}
       </CardList>
