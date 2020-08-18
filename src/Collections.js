@@ -30,6 +30,7 @@ const Collections = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [singleView, setSingleView] = useState(false);
   const [listOffset, setListOffset] = useState(0);
+  const [collectionsLength, setCollectionsLength] = useState(0);
 
   const fetchCollections = () => {
     query
@@ -43,6 +44,7 @@ const Collections = () => {
           images: doc.data().images,
         }));
         setCollections(collec);
+        setCollectionsLength(collec.length);
       });
   };
 
@@ -62,6 +64,19 @@ const Collections = () => {
     setSingleView(!singleView);
   };
 
+  const onPrevius = () => {
+    if (currentIndex === 0) {
+      return;
+    }
+    setCurrentIndex(currentIndex - 1);
+  };
+
+  const onNext = () => {
+    if (currentIndex === collections.length - 1) {
+      return;
+    }
+    setCurrentIndex(currentIndex + 1);
+  };
   return (
     <div>
       <AppBar />
@@ -71,6 +86,9 @@ const Collections = () => {
           <SingleCollectionView
             collections={collections}
             currentIndex={currentIndex}
+            onPrevius={onPrevius}
+            onNext={onNext}
+            length={collectionsLength}
           />
         ) : (
           <CollectionsList

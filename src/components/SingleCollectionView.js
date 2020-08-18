@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import styled from "@emotion/styled";
 
+import CollectionsControls from "./CollectionsControls";
+
 import { typeScale, primaryFont, secondaryFont, fontWeight } from "../utils";
 
 import Firebase from "../../config/Firebase";
@@ -12,7 +14,7 @@ const Wrapper = styled.div`
 `;
 
 const ImageArea = styled.div`
-  height: calc((100vh / 4) * 2.3);
+  height: calc((100vh / 4) * 2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +22,7 @@ const ImageArea = styled.div`
 
 const Image = styled.img`
   max-width: 97vw;
-  max-height: calc(((100vh / 4) * 2.3) - 20px);
+  max-height: calc(((100vh / 4) * 2) - 20px);
 `;
 
 const TextArea = styled.div`
@@ -39,7 +41,18 @@ const Description = styled.p`
   font-weight: ${fontWeight.normal};
 `;
 
-const SingleCollectionView = ({ collections, currentIndex }) => {
+const Controls = styled.div`
+  position: sticky;
+  bottom: 55px;
+`;
+
+const SingleCollectionView = ({
+  collections,
+  currentIndex,
+  onPrevius,
+  onNext,
+  length,
+}) => {
   const [imagesURL, setImagesURL] = useState([]);
   const [thumbsURL, setThumbsURL] = useState([]);
 
@@ -61,24 +74,36 @@ const SingleCollectionView = ({ collections, currentIndex }) => {
         });
     });
     */
+    const thumbs = [];
     query
       .doc(collections[currentIndex].images[0])
       .get()
       .then((doc) => {
-        setThumbsURL(thumbsURL.concat([doc.data().thumbnail]));
+        thumbs.push(doc.data().thumbnail);
+        setThumbsURL(thumbs);
       });
-  }, []);
+  }, [currentIndex]);
 
   return (
-    <Wrapper>
-      <ImageArea>
-        <Image src={thumbsURL[0] ? thumbsURL[0] : ""} alt="cover" />
-      </ImageArea>
-      <TextArea>
-        <Title>{collections[currentIndex].name}</Title>
-        <Description>{collections[currentIndex].description}</Description>
-      </TextArea>
-    </Wrapper>
+    <div>
+      <Wrapper>
+        <ImageArea>
+          <Image src={thumbsURL[0] ? thumbsURL[0] : ""} alt="cover" />
+        </ImageArea>
+        <TextArea>
+          <Title>{collections[currentIndex].name}</Title>
+          <Description>{collections[currentIndex].description}</Description>
+        </TextArea>
+      </Wrapper>
+      <Controls>
+        <CollectionsControls
+          onPrevius={onPrevius}
+          onNext={onNext}
+          currentIndex={currentIndex}
+          length={length}
+        />
+      </Controls>
+    </div>
   );
 };
 
