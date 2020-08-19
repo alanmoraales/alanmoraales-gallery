@@ -31,6 +31,14 @@ const Collections = () => {
   const [singleView, setSingleView] = useState(false);
   const [listOffset, setListOffset] = useState(0);
   const [collectionsLength, setCollectionsLength] = useState(0);
+  /*
+  images = [
+    {
+      original: "",
+      fullscreen: "",
+    }
+  ]
+  */
 
   const fetchCollections = () => {
     query
@@ -41,7 +49,6 @@ const Collections = () => {
           name: doc.data().name,
           id: doc.data().id,
           description: doc.data().description,
-          images: doc.data().images,
         }));
         setCollections(collec);
         setCollectionsLength(collec.length);

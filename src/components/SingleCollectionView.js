@@ -4,6 +4,9 @@ import styled from "@emotion/styled";
 
 import CollectionsControls from "./CollectionsControls";
 
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+
 import { typeScale, primaryFont, secondaryFont, fontWeight } from "../utils";
 
 import Firebase from "../../config/Firebase";
@@ -14,6 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const ImageArea = styled.div`
+  width: 100vw;
   height: calc((100vh / 4) * 2);
   display: flex;
   justify-content: center;
@@ -46,6 +50,31 @@ const Controls = styled.div`
   bottom: 55px;
 `;
 
+const FullImageArea = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
+const FullImage = styled.img`
+  max-width: 95vw;
+  max-height: 95vh;
+`;
+const CustomImage = (item) => {
+  return (
+    <ImageArea>
+      <Image src={item.original} />
+    </ImageArea>
+  );
+};
+
+const CustomFullImage = (item) => {
+  return (
+    <FullImageArea>
+      <FullImage src={item.fullscreen} />
+    </FullImageArea>
+  );
+};
+
 const SingleCollectionView = ({
   collections,
   currentIndex,
@@ -53,42 +82,41 @@ const SingleCollectionView = ({
   onNext,
   length,
 }) => {
-  const [imagesURL, setImagesURL] = useState([]);
-  const [thumbsURL, setThumbsURL] = useState([]);
+  const [images, setImages] = useState([{ original: "" }]);
+  const [fullscreenMode, setFullscreenMode] = useState(false);
 
   const firestore = Firebase.firestore();
-  const query = firestore.collection("images");
+
+  const query = firestore
+    .collection("images")
+    .where("collections", "array-contains", collections[currentIndex].id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    /*
-    collections[currentIndex].images.forEach((image) => {
-      query
-        .doc(image)
-        .get()
-        .then((doc) => {
-          const data = doc.data();
-          setImagesURL(imagesURL.concat([data.src]));
-          setThumbsURL(thumbsURL.concat([data.thumbnail]));
-        });
+    query.get().then((snapshots) => {
+      const URLS = snapshots.docs.map((image) => ({
+        original: image.data().thumbnail,
+        fullscreen: image.data().src,
+      }));
+      setImages(URLS);
     });
-    */
-    const thumbs = [];
-    query
-      .doc(collections[currentIndex].images[0])
-      .get()
-      .then((doc) => {
-        thumbs.push(doc.data().thumbnail);
-        setThumbsURL(thumbs);
-      });
   }, [currentIndex]);
+
+  const toggleFullscren = (value) => setFullscreenMode(value);
 
   return (
     <div>
       <Wrapper>
         <ImageArea>
-          <Image src={thumbsURL[0] ? thumbsURL[0] : ""} alt="cover" />
+          <ImageGallery
+            items={images}
+            showThumbnails={false}
+            showBullets={true}
+            showPlayButton={false}
+            renderItem={fullscreenMode ? CustomFullImage : CustomImage}
+            onScreenChange={toggleFullscren}
+          />
         </ImageArea>
         <TextArea>
           <Title>{collections[currentIndex].name}</Title>
