@@ -21,5 +21,6 @@ export const global = css`
     font-family: ${primaryFont};
     max-width: 2000px;
     margin: 0 auto;
+    overflow-x: hidden;
   }
 `;

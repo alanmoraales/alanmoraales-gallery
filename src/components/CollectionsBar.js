@@ -8,6 +8,8 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
 import ViewArrayIcon from "@material-ui/icons/ViewArray";
 
+import CollectionsControls from "./CollectionsControls";
+
 import { typeScale, fontWeight, primaryFont } from "../utils";
 
 const Bar = styled.div`
@@ -28,11 +30,37 @@ const Title = styled.p`
   font-family: ${primaryFont};
 `;
 
-const CollectionsBar = ({ onChange, singleViewState }) => {
+const Controls = styled.div`
+  display: none;
+  width: 300px;
+  @media (min-width: 1280px) {
+    display: block;
+  }
+`;
+
+const CollectionsBar = ({
+  onChange,
+  singleViewState,
+  onPrevius,
+  onNext,
+  currentIndex,
+  length,
+  singleView,
+}) => {
   return (
     <div>
       <Bar>
         <Title>Collections</Title>
+        {singleView ? (
+          <Controls>
+            <CollectionsControls
+              onPrevius={onPrevius}
+              onNext={onNext}
+              currentIndex={currentIndex}
+              length={length}
+            />
+          </Controls>
+        ) : null}
         <ToggleButtonGroup
           size="small"
           value={singleViewState}
