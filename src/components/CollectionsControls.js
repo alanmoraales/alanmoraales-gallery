@@ -13,6 +13,11 @@ const Wrapper = styled.div`
   background-color: ${neutral[300]};
   padding-top: 5px;
   padding-bottom: 5px;
+
+  @media (min-width: 1280px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 `;
 const Grid = styled.div`
   margin: 0 auto;

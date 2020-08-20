@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   min-height: calc(100vh - 63px - 55px);
 
   @media (min-width: 1280px) {
-    min-height: calc(100vh - 63px);
+    min-height: 0px;
   }
 `;
 
@@ -31,6 +31,14 @@ const Collections = () => {
   const [singleView, setSingleView] = useState(false);
   const [listOffset, setListOffset] = useState(0);
   const [collectionsLength, setCollectionsLength] = useState(0);
+  /*
+  images = [
+    {
+      original: "",
+      fullscreen: "",
+    }
+  ]
+  */
 
   const fetchCollections = () => {
     query
@@ -41,7 +49,6 @@ const Collections = () => {
           name: doc.data().name,
           id: doc.data().id,
           description: doc.data().description,
-          images: doc.data().images,
         }));
         setCollections(collec);
         setCollectionsLength(collec.length);
@@ -80,7 +87,15 @@ const Collections = () => {
   return (
     <div>
       <AppBar />
-      <CollectionsBar onChange={toggleView} singleViewState={singleView} />
+      <CollectionsBar
+        onChange={toggleView}
+        singleViewState={singleView}
+        onPrevius={onPrevius}
+        onNext={onNext}
+        currentIndex={currentIndex}
+        length={collectionsLength}
+        singleView={singleView}
+      />
       <Wrapper>
         {singleView ? (
           <SingleCollectionView

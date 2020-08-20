@@ -28,6 +28,7 @@
     "react": "^16.13.1",
     "react-awesome-lightbox": "^1.7.3",
     "react-dom": "^16.13.1",
+    "react-image-gallery": "^1.0.8",
     "react-images": "^1.1.7",
     "react-infinite-scroll-component": "^5.0.5",
     "react-modal": "^3.11.2",

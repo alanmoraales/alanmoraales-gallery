@@ -29,18 +29,29 @@ const useStyles = makeStyles({
   },
 });
 
-const MediaCard = ({ index, title, image, description, onCardClick }) => {
+const MediaCard = ({
+  index,
+  title,
+  collectionID,
+  description,
+  onCardClick,
+}) => {
   const firestore = Firebase.firestore();
-  const query = firestore.collection("images").doc(image);
+  const query = firestore
+    .collection("images")
+    .where("collections", "array-contains", collectionID)
+    .limit(1);
   const classes = useStyles();
 
   const [coverURL, setCoverURL] = useState("");
 
   useEffect(() => {
-    query.get().then((doc) => {
-      setCoverURL(doc.data().thumbnail);
+    query.get().then((docs) => {
+      docs.forEach((doc) => {
+        setCoverURL(doc.data().thumbnail);
+      });
     });
-  });
+  }, []);
 
   const handleClick = () => {
     onCardClick(index);
@@ -108,7 +119,7 @@ const CollectionsList = ({ collections, onCardClick, yOffset }) => {
             key={index}
             index={index}
             title={collection.name}
-            image={collection.images[0]}
+            collectionID={collection.id}
             description={collection.description}
             onCardClick={onCardClick}
           />
