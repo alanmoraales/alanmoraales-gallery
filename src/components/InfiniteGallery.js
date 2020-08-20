@@ -38,7 +38,6 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
   };
 
   const onOpen = () => {
-    //document.body.style.overflow = "hidden";
     setWindowOffset(window.scrollY);
     document.body.setAttribute(
       "style",
