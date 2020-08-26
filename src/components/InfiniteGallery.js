@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const customStyles = {
-  overlay: { zIndex: 2 },
+  overlay: { zIndex: 6 },
 };
 
 Modal.setAppElement("#modal");
