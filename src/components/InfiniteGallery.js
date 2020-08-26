@@ -54,7 +54,12 @@ const InfiniteGallery = ({ thumbnails, photos, next, hasMore }) => {
         loader={<GallerySpinner />}
         endMessage={<EndGalleryMessage />}
       >
-        <Gallery photos={thumbnails} margin={5} onClick={openViewer} />
+        <Gallery
+          photos={thumbnails}
+          margin={5}
+          onClick={openViewer}
+          direction="column"
+        />
       </InfiniteScroll>
       <Modal
         isOpen={viewerOpen}
